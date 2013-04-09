@@ -6,7 +6,7 @@ var db = mysql.createConnection({
 		host : 'localhost',
 		user : 'root',
 	password : '',
-	database : 'icollege'
+	database : 'bjtu_me'
 });
 db.connect(function (err, rows) {
 	if (err) {
