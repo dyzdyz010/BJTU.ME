@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>iCollege</title>
+	
+	<link href="css/bootstrap.css" rel="stylesheet">
+
+	<!-- Font Effects -->
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro&effect=putting-green" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="css/flat-ui.css" rel="stylesheet">
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="images/favicon.ico" type="image/x-icon" rel=icon>
+    
+    <!--<script src="js/jquery-1.8.2.min.js"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    <!--<script src="js/jquery-ui-1.10.0.custom.min.js"></script>-->
+    <script src="js/jquery.dropkick-1.0.0.js"></script>
+    <script src="js/custom_checkbox_and_radio.js"></script>
+    <script src="js/custom_radio.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+    <script src="js/bootstrap-tooltip.js"></script>
+    <script src="js/jquery.placeholder.js"></script>
+	<script src="js/application.js"></script>
+	
+	<!-- Loading Custom Script Files -->
+    <script src="js/index.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/md5.js"></script>
+    
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCJPNB7P9KeU033UCFHm8bLQ_gpqDkYiYc&sensor=true">
+    </script>
+    <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+    
+</head>
+
+<body onload="onLoad()">
+<!--Navigation Bar-->
+<div class="container">
+	<div class="navbar navbar-inverse">
+		<div class="navbar-inner">
+			<div class="nav-collapse collapse">
+			<!-- Menus -->
+				<ul class="nav">
+					<li>
+						<a href="/">首页</a>
+					</li>
+					<li>
+						<a href="#">
+						周边信息
+						<span class="navbar-unread">3</span>
+						</a>
+					</li>
+				</ul>
+				
+			<!-- User Controlls -->
+				<ul class="nav user">
+					<li>
+						<a href="#">登录</a>
+					</li>
+					<li>
+						<a href="#">
+						注册
+						<span class="navbar-unread">3</span>
+						</a>
+					</li> 
+				</ul>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+	
+	<h1 class="demo-logo title font-effect-putting-green" align="center">
+		College.Around
+		<small>Things around your school.</small>
+	</h1>
+	
+	<div id="map" class="panel"></div>
+	<div class="font-effect-3d flip">Click Here～</div>
+	
+	<div id="classes" class="row demo-tiles">
+		<!--
+<div class="span3">
+			<div class="tile" onclick="">
+				<img class="tile-image big-illustration" src="images/illustrations/map.png" />
+				<h3 class="tile-title">一二三四五六</h3>
+				<p>This is a description</p>
+			</div>
+		</div>
+		<div class="span3">
+			<div class="tile">
+				<img class="tile-image big-illustration" src="images/illustrations/compass.png" />
+				<h3 class="tile-title">Guess who I am?</h3>
+				<p>This is a description</p>
+			</div>
+		</div>
+		<div class="span3">
+			<div class="tile">
+				<img class="tile-image big-illustration" src="images/illustrations/gift.png" />
+				<h3 class="tile-title">Guess who I am?</h3>
+				<p>This is a description</p>
+			</div>
+		</div>
+		<div class="span3">
+			<div class="tile">
+				<img class="tile-image big-illustration" src="images/illustrations/colors.png" />
+				<h3 class="tile-title">Guess who I am?</h3>
+				<p>This is a description</p>
+			</div>
+		</div>
+-->
+	</div>
+</div>
+
+</body>
+</html>
