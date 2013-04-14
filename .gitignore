@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 .DS_Store
 *.un~
 node_modules
 .idea
+=======
+
+.DS_Store
+
+*.un~
+>>>>>>> 增加忽略文件列表
