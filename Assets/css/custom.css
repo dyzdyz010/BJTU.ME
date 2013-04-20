@@ -26,15 +26,6 @@
 	padding-left: 3px;
 }
 
-.flip {
-	font-size: 50px;
-	margin-bottom: 20px;
-}
-
-.panel {
-	height: 500px;
-}
-
 .span3 {
 	/*width: 300px;*/
 	margin-bottom: 20px;
@@ -61,5 +52,3 @@ div.tile:active {
 	margin-bottom: 20px;
 }
 
-.tile h3 {
-}
