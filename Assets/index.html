@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html >
+<html>
 <head>
 	<meta charset="utf-8">
 	<title>BJTU.ME</title>
@@ -17,6 +17,10 @@
     <!-- jQuery & jQuery-UI -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+    
+    <!-- Backbone.js & Underscore.js -->
+    <script src="http://documentcloud.github.io/underscore/underscore-min.js"></script>
+    <script src="http://documentcloud.github.io/backbone/backbone-min.js"></script>
     
     <script src="js/jquery.dropkick-1.0.0.js"></script>
     <script src="js/custom_checkbox_and_radio.js"></script>
@@ -72,20 +76,9 @@
 <!-- Main Content -->
 <div class="container">
 	
-	<h1 class="demo-logo title font-effect-putting-green" align="center">
+	<h1 id="title" class="demo-logo title" align="center">
 		BJTU.ME
 		<small>Things around our school.</small>
-	</h1>
-	
-	<!-- Loading -->
-	<h1 class="loader">
-		<span>L</span>
-		<span>O</span>
-		<span>A</span>
-		<span>D</span>
-		<span>I</span>
-		<span>N</span>
-		<span>G</span>
 	</h1>
 	
 	<div id="content" class="row demo-tiles">
@@ -103,5 +96,10 @@
 	</div>
 </div>
 
+<footer>
+	<div class="container">
+		<h3>Hello?</h3>
+	</div>
+</footer>
 </body>
 </html>

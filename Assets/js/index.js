@@ -6,11 +6,22 @@ function onLoad() {
 	request.onreadystatechange = function() {
 		if(request.readyState == 4 && request.status == 200)
 		{
-			//console.log("Data recieved: " + request.responseText);
-			document.getElementById('content').innerHTML = request.responseText;
+			console.log("Data recieved: " + request.responseText);
+			var page = JSON.parse(request.responseText);
+			console.log("Data recieved: " + page.data);
+			var dataModel = page.data;
+			var pagestr = page.page;
+			
+			$("#content").empty();
+			for (i = 0; i < dataModel.length; i++) {
+				$(pagestr).appendTo("#content");
+				$(".tile-image").attr('src', dataModel[i].img);
+				//$(".tile-title").get(i).text(dataModel[i].name);
+				console.log($(".tile-title"));
+			}
 		}
 	};
-	request.open("POST", baseUrl + "/classes", true);
+	request.open("GET", baseUrl + "/classes", true);
 	request.send();
 }
 
@@ -19,7 +30,9 @@ function checkOnline() {
 }
 
 function classClicked(name) {
+	document.getElementById('title').innerHTML = name + '<small>' + name + '</small>';
 	console.log(name);
+	$('#content').fadeOut();
 }
 
 function showLoading() {
