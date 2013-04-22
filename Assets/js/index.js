@@ -6,19 +6,22 @@ function onLoad() {
 	request.onreadystatechange = function() {
 		if(request.readyState == 4 && request.status == 200)
 		{
-			console.log("Data recieved: " + request.responseText);
 			var page = JSON.parse(request.responseText);
-			console.log("Data recieved: " + page.data);
 			var dataModel = page.data;
 			var pagestr = page.page;
 			
 			$("#content").empty();
 			for (i = 0; i < dataModel.length; i++) {
 				$(pagestr).appendTo("#content");
-				$(".tile-image").attr('src', dataModel[i].img);
-				//$(".tile-title").get(i).text(dataModel[i].name);
 				console.log($(".tile-title"));
 			}
+			$(".class").each(function (i) {
+				$(this).attr('id', dataModel[i].sname);
+				$(this).find("img").attr('src', dataModel[i].img);
+				$(this).on('click', {data: dataModel[i]}, classClicked);
+				$(this).find("h3").text(dataModel[i].name);
+				$(this).find("p").text(dataModel[i].intro);
+			});
 		}
 	};
 	request.open("GET", baseUrl + "/classes", true);
@@ -29,10 +32,14 @@ function checkOnline() {
 	
 }
 
-function classClicked(name) {
-	document.getElementById('title').innerHTML = name + '<small>' + name + '</small>';
-	console.log(name);
-	$('#content').fadeOut();
+function classClicked(e) {
+	var name = $(this).attr('id');
+	$('#title').fadeOut(200, function() {
+		$('#title').html(e.data.data.name + '<small>' + e.data.data.intro + '</small>');
+	});
+	$('#title').fadeIn(200);
+	console.log(e.data);
+	//$('#content').fadeOut();
 }
 
 function showLoading() {
