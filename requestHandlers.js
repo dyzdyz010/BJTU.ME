@@ -40,9 +40,21 @@ function classes(request, response, postData) {
 				 "</div>" +
 			 "</div>";
 		}
-		response.writeHead(200, {"Content-Type": "text/html"});
-		//response.write(body);
-		response.end(body);
+		fs.readFile('Assets/templates/classes.html', 'utf-8', function (err, data) {
+			//console.log(data);
+			var d = {
+				page: data,
+				data: results
+			};
+			console.log(d);
+			var dstr = JSON.stringify(d);
+			response.writeHead(200, {"Content-Type": "application/json"});
+			response.write(dstr);
+			response.end();
+		});
+//		response.writeHead(200, {"Content-Type": "text/html"});
+//		response.write(body);
+//		response.end(body);
 	});
 }
 
