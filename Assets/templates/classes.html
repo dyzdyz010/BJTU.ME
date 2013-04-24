@@ -1,7 +1,6 @@
-<div class='span3 class'>
-	<div class='tile'>
-		<img class='tile-image big illustration' />
-		<h3 class='tile-title'>周边聚餐</h3>
-		<p class="tile-desc">这里是周边聚餐</p>
-	</div>
-</div>
+for clss in classes
+	.span3(onclick='classClicked("#{clss.sname}")')
+		.tile
+			img(class='tile-image big illustration', src=clss.img)
+			h3(class='tile-title')= clss.name
+			p(class='tile-desc')= clss.intro

@@ -1,4 +1,3 @@
-var request = new XMLHttpRequest();
 var baseUrl = "http://127.0.0.1:8888";
 
 function onLoad() {
@@ -9,32 +8,53 @@ function onLoad() {
 }
 
 function initClasses() {
+	Class = Backbone.Model.extend({
+		defaults: {
+			img: "", 
+			sname: "name", 
+			name: "周边信息", 
+			intro: "周边信息"
+		}, 
+		initialize: function(attr) {
+			this.img = attr.img;
+			this.sname = attr.sname;
+			this.name = attr.name;
+			this.intro = attr.intro;
+		}
+		
+	});
+	
+	ClassCollection = Backbone.Collection.extend({
+		model: Class
+	});
+	clssCll = new ClassCollection();
+	
 	$.get(baseUrl + "/classes", function(response, status) {
 		if(status == "success") {
-			$("#content").empty();
-			//console.log(response);
 			$.each(response.data, function(index, data) {
-				console.log(data);
-				$(response.page)
-				.find('img').attr('src', data.img).end()
-				.find('h3').html(data.name).end()
-				.find('p').html(data.intro).end()
-				.on('click', {data: data}, classClicked)
-				.appendTo("#content");
+				var clss = new Class(data);
+				clssCll.add(clss);
 			});
-			/*
-for (i = 0; i < data.data.length; i++) {
-				$(data.page).appendTo("#content");
-				console.log($(".tile-title"));
-			}
-			$(".class").each(function (i) {
-				$(this).attr('id', data.data[i].sname);
-				$(this).find("img").attr('src', data.data[i].img);
-				$(this).on('click', {data: data.data[i]}, classClicked);
-				$(this).find("h3").text(data.data[i].name);
-				$(this).find("p").text(data.data[i].intro);
+			//console.log(response.page);
+			var result = jade.compile(response.page);
+			//console.log(result({classes:clssCll.toJSON()}));
+		
+			$("#content").empty();
+			
+			ClassView = Backbone.View.extend({
+				el: $("#content"), 
+				render: function() {
+					//var page = _.template($(response.page).html());
+					//console.log(page);
+					this.$el.html(result({classes:clssCll.toJSON()}));
+					return this;
+				}, 
+				initialize: function() {
+					this.render();
+				}
+				
 			});
-*/
+			var clssView = new ClassView();
 		}
 	});
 }
@@ -43,14 +63,13 @@ function checkOnline() {
 	
 }
 
-function classClicked(e) {
-	var name = $(this).attr('id');
+function classClicked(sname) {
+	var model = clssCll.where({sname: sname}).pop();
 	$('#title').fadeOut(200, function() {
-		$('#title').html(e.data.data.name + '<small>' + e.data.data.intro + '</small>');
+		$('#title').html(model.name + '<small>' + model.intro + '</small>');
 	});
 	$('#title').fadeIn(200);
-	console.log(e.data.data);
-	//$('#content').fadeOut();
+	console.log(model);
 }
 
 function showLoading() {
