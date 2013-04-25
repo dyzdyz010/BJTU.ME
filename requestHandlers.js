@@ -1,6 +1,5 @@
 var fs = require("fs");
 var querystring = require("querystring");
-//var ip = require("./ip.js");
 var mysql = require("mysql");
 var db = mysql.createConnection({
 		host : 'localhost',
@@ -29,18 +28,7 @@ function classes(request, response, postData) {
 			response.end();
 		}
 		console.log(results);
-		var body = "";
-		for (i = 0; i < results.length; i++) {
-			body += "<div class='span3'>" + 
-			 	 "<div class='tile' onclick='classClicked(\"" + results[i].sname + "\")'>" +
-				 	 "<img class='tile-image big-illustration' src=\"" + 
-					results[i].img + "\" />" +
-					 "<h3 class='tile-title'>" + results[i].name + "</h3>" +
-					 "<p>" + results[i].intro + "</p>" +
-				 "</div>" +
-			 "</div>";
-		}
-		fs.readFile('Assets/templates/classes.html', 'utf-8', function (err, data) {
+		fs.readFile('Assets/templates/classes.jade', 'utf-8', function (err, data) {
 			//console.log(data);
 			var d = {
 				page: data,
@@ -52,9 +40,6 @@ function classes(request, response, postData) {
 			response.write(dstr);
 			response.end();
 		});
-//		response.writeHead(200, {"Content-Type": "text/html"});
-//		response.write(body);
-//		response.end(body);
 	});
 }
 

@@ -5,6 +5,8 @@ h1.loader{
   font-size: 4.6875em;
   color: transparent;
   letter-spacing: 0.01em;
+  -webkit-user-select: none;
+  -moz-user-select: none;
 }
 .loader span{
   text-shadow:

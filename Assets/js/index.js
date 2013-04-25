@@ -1,13 +1,16 @@
 var baseUrl = "http://127.0.0.1:8888";
 
 function onLoad() {
+	// Set up model structures.
+	initModels();
+	
 	//TODO: Check if the user logged in.
 	
 	// Show classes on homepage.
 	initClasses();
 }
 
-function initClasses() {
+function initModels() {
 	Class = Backbone.Model.extend({
 		defaults: {
 			img: "", 
@@ -25,32 +28,41 @@ function initClasses() {
 	});
 	
 	ClassCollection = Backbone.Collection.extend({
-		model: Class
+		model: Class,
+		url: baseUrl + "/classes",
+		parse: function(response) {
+			return response.data;
+		}
 	});
+}
+
+function initClasses() {
 	clssCll = new ClassCollection();
 	
 	$.get(baseUrl + "/classes", function(response, status) {
 		if(status == "success") {
-			$.each(response.data, function(index, data) {
+			/*
+$.each(response.data, function(index, data) {
 				var clss = new Class(data);
 				clssCll.add(clss);
 			});
+*/
 			//console.log(response.page);
 			var result = jade.compile(response.page);
-			//console.log(result({classes:clssCll.toJSON()}));
+			console.log(result);
 		
-			$("#content").empty();
+			//$("#content").empty();
 			
 			ClassView = Backbone.View.extend({
 				el: $("#content"), 
 				render: function() {
-					//var page = _.template($(response.page).html());
-					//console.log(page);
-					this.$el.html(result({classes:clssCll.toJSON()}));
+					console.log(iview);
+					iview.$el.html(result({classes:clssCll.models}));
 					return this;
 				}, 
 				initialize: function() {
-					this.render();
+					iview = this;
+					clssCll.fetch({success: this.render});
 				}
 				
 			});
@@ -70,8 +82,4 @@ function classClicked(sname) {
 	});
 	$('#title').fadeIn(200);
 	console.log(model);
-}
-
-function showLoading() {
-	
 }
