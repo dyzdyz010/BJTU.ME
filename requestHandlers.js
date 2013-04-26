@@ -1,4 +1,5 @@
 var fs = require("fs");
+var model = require("./model");
 var querystring = require("querystring");
 var mysql = require("mysql");
 var db = mysql.createConnection({
@@ -22,24 +23,17 @@ function index(request, response, postData) {
 }
 
 function classes(request, response, postData) {
-	db.query('select * from class', function (err, results) {
+	var classes = new model.Classes();
+	classes.getList( function (err, results) {
 		if (err) {
 			response.writeHead(500);
 			response.end();
 		}
 		console.log(results);
-		fs.readFile('Assets/templates/classes.jade', 'utf-8', function (err, data) {
-			//console.log(data);
-			var d = {
-				page: data,
-				data: results
-			};
-			console.log(d);
-			var dstr = JSON.stringify(d);
-			response.writeHead(200, {"Content-Type": "application/json"});
-			response.write(dstr);
-			response.end();
-		});
+		var rstr = JSON.stringify(results);
+		response.writeHead(200, {"Content-Type": "application/json"});
+		response.write(rstr);
+		response.end();
 	});
 }
 

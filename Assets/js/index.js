@@ -1,6 +1,10 @@
 var baseUrl = "http://127.0.0.1:8888";
+var loading = "";
 
 function onLoad() {
+	// Fetch loading page from server
+	initLoading();
+	
 	// Set up model structures.
 	initModels();
 	
@@ -10,17 +14,27 @@ function onLoad() {
 	initClasses();
 }
 
+function initLoading() {
+	$.get(baseUrl + "/templates/loading.html", function(response, status) {
+		if(status == "success") {
+			loading = response;
+			console.log(loading);
+		}
+	});
+}
+
 function initModels() {
+	console.log(loading);
 	Class = Backbone.Model.extend({
 		defaults: {
 			img: "", 
-			sname: "name", 
+			cname: "name", 
 			name: "周边信息", 
 			intro: "周边信息"
 		}, 
 		initialize: function(attr) {
 			this.img = attr.img;
-			this.sname = attr.sname;
+			this.cname = attr.cname;
 			this.name = attr.name;
 			this.intro = attr.intro;
 		}
@@ -29,30 +43,18 @@ function initModels() {
 	
 	ClassCollection = Backbone.Collection.extend({
 		model: Class,
-		url: baseUrl + "/classes",
-		parse: function(response) {
-			return response.data;
-		}
+		url: baseUrl + "/classes"
 	});
 }
 
 function initClasses() {
 	clssCll = new ClassCollection();
 	
-	$.get(baseUrl + "/classes", function(response, status) {
+	$.get(baseUrl + "/templates/classes.jade", function(response, status) {
 		if(status == "success") {
-			/*
-$.each(response.data, function(index, data) {
-				var clss = new Class(data);
-				clssCll.add(clss);
-			});
-*/
-			//console.log(response.page);
-			var result = jade.compile(response.page);
+			var result = jade.compile(response);
 			console.log(result);
 		
-			//$("#content").empty();
-			
 			ClassView = Backbone.View.extend({
 				el: $("#content"), 
 				render: function() {
@@ -75,8 +77,8 @@ function checkOnline() {
 	
 }
 
-function classClicked(sname) {
-	var model = clssCll.where({sname: sname}).pop();
+function classClicked(clssname) {
+	var model = clssCll.where({cname: clssname}).pop();
 	$('#title').fadeOut(200, function() {
 		$('#title').html(model.name + '<small>' + model.intro + '</small>');
 	});
