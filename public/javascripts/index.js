@@ -44,12 +44,32 @@ function initModels() {
 		model: Category,
 		url: baseUrl + "/categories"
 	});
+
+    Router = Backbone.Router.extend({
+        routes: {
+            "about": "showAbout",
+            "items/:cname": "showItems"
+        },
+        showAbout: function() {
+            alert("This is the router function showAbout.");
+        },
+        showItems: function(cname) {
+            var model = categories.where({cname: cname}).pop();
+            $('#title').fadeOut(200, function() {
+                $('#title').html(model.name + '<small>' + model.intro + '</small>');
+            });
+            $('#title').fadeIn(200);
+            console.log(model);
+        }
+    });
+    router = new Router();
+    Backbone.history.start();
 }
 
 function initCategories() {
 	categories = new CategoryCollection();
 	
-	$.get(baseUrl + "/templates/classes.jade", function(response, status) {
+	$.get(baseUrl + "/templates/categories.jade", function(response, status) {
 		if(status == "success") {
 			var result = jade.compile(response);
 			console.log(result);
@@ -74,13 +94,4 @@ function initCategories() {
 
 function checkOnline() {
 	
-}
-
-function classClicked(clssname) {
-	var model = categories.where({cname: clssname}).pop();
-	$('#title').fadeOut(200, function() {
-		$('#title').html(model.name + '<small>' + model.intro + '</small>');
-	});
-	$('#title').fadeIn(200);
-	console.log(model);
 }
