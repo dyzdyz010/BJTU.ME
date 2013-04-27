@@ -1,4 +1,4 @@
-var baseUrl = "http://127.0.0.1:8888";
+var baseUrl = "http://127.0.0.1:3000";
 var loading = "";
 
 function onLoad() {
@@ -11,21 +11,20 @@ function onLoad() {
 	//TODO: Check if the user logged in.
 	
 	// Show classes on homepage.
-	initClasses();
+    initCategories();
 }
 
 function initLoading() {
-	$.get(baseUrl + "/templates/loading.html", function(response, status) {
+	$.get(baseUrl + "/loading.html", function(response, status) {
 		if(status == "success") {
 			loading = response;
-			console.log(loading);
+			//console.log(loading);
 		}
 	});
 }
 
 function initModels() {
-	console.log(loading);
-	Class = Backbone.Model.extend({
+    Category = Backbone.Model.extend({
 		defaults: {
 			img: "", 
 			cname: "name", 
@@ -40,35 +39,35 @@ function initModels() {
 		}
 		
 	});
-	
-	ClassCollection = Backbone.Collection.extend({
-		model: Class,
-		url: baseUrl + "/classes"
+
+    CategoryCollection = Backbone.Collection.extend({
+		model: Category,
+		url: baseUrl + "/categories"
 	});
 }
 
-function initClasses() {
-	clssCll = new ClassCollection();
+function initCategories() {
+	categories = new CategoryCollection();
 	
 	$.get(baseUrl + "/templates/classes.jade", function(response, status) {
 		if(status == "success") {
 			var result = jade.compile(response);
 			console.log(result);
 		
-			ClassView = Backbone.View.extend({
+			CategoryView = Backbone.View.extend({
 				el: $("#content"), 
 				render: function() {
 					console.log(iview);
-					iview.$el.html(result({classes:clssCll.models}));
-					return this;
+					iview.$el.html(result({classes:categories.models}));
+					return iview;
 				}, 
 				initialize: function() {
 					iview = this;
-					clssCll.fetch({success: this.render});
+                    categories.fetch({success: this.render});
 				}
 				
 			});
-			var clssView = new ClassView();
+			var categoryView = new CategoryView();
 		}
 	});
 }
@@ -78,7 +77,7 @@ function checkOnline() {
 }
 
 function classClicked(clssname) {
-	var model = clssCll.where({cname: clssname}).pop();
+	var model = categories.where({cname: clssname}).pop();
 	$('#title').fadeOut(200, function() {
 		$('#title').html(model.name + '<small>' + model.intro + '</small>');
 	});
