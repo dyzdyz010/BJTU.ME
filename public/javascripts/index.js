@@ -1,6 +1,8 @@
 var baseUrl = "http://127.0.0.1:3000";
 var loading = "";
 
+seajs.use('deps');
+
 function onLoad() {
 	// Fetch loading page from server
 	initLoading();
@@ -44,6 +46,7 @@ function initModels() {
 		model: Category,
 		url: baseUrl + "/categories"
 	});
+    categories = new CategoryCollection();
 
     Router = Backbone.Router.extend({
         routes: {
@@ -55,6 +58,7 @@ function initModels() {
         },
         showItems: function(cname) {
             var model = categories.where({cname: cname}).pop();
+            console.log(model);
             $('#title').fadeOut(200, function() {
                 $('#title').html(model.name + '<small>' + model.intro + '</small>');
             });
@@ -67,7 +71,6 @@ function initModels() {
 }
 
 function initCategories() {
-	categories = new CategoryCollection();
 	
 	$.get(baseUrl + "/templates/categories.jade", function(response, status) {
 		if(status == "success") {
