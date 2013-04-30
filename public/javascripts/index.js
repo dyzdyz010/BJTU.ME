@@ -50,8 +50,18 @@ function initModels() {
 
     Router = Backbone.Router.extend({
         routes: {
+            "login": "login",
             "about": "showAbout",
             "items/:cname": "showItems"
+        },
+        login: function() {
+            $("#content").fadeOut(function() {
+                $("#content").html(loading);
+                $.get(baseUrl + "/login.html", function(response, status) {
+                    $("#content").html(response);
+                    $("#content").fadeIn();
+                });
+            });
         },
         showAbout: function() {
             alert("This is the router function showAbout.");
