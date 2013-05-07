@@ -9,7 +9,7 @@ seajs.config({
   	    // jQuery & jQuery-UI
         'jquery': {
       	    src: 'jquery-2.0.0.min.js',
-      	    exports: '$'
+      	    exports: 'jQuery'
         },
         'jqueryui': {
 	        src: 'jquery-ui.min.js'
@@ -17,11 +17,12 @@ seajs.config({
     
         // Backbone.js & Underscore.js & Jade.js
         'underscore': {
-	        src: 'underscore-min.js'
+	        src: 'underscore-min.js',
+            exports: '_'
         },
         'backbone': {
 		    src: 'backbone-min.js',
-		    deps: ['underscore'],
+		    deps: ['underscore', 'jquery'],
 		    exports: 'Backbone'
 	    },
     	'jade': {
@@ -50,12 +51,8 @@ seajs.config({
 	    },
 	    'flat-application': {
 	    	src: 'application.js'
-	    },
-	
-    	//App Scripts
-    	'deps': {
-	    	src: 'dependencies.js'
-    	}
+	    }
+
 	
   }
 });

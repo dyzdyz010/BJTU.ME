@@ -1,5 +1,6 @@
 define(function(require) {
 	require('jquery');
+    require('md5')($);
 	require('jqueryui');
 	require('underscore');
 	require('backbone');
@@ -11,5 +12,8 @@ define(function(require) {
 	require('flat-bootstrap-tooltip');
 	require('flat-placeholder');
 	require('flat-application');
+    require('model');
+    require('collection');
+    require('view');
 
 });
