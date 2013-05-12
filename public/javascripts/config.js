@@ -8,49 +8,49 @@ seajs.config({
 
   	    // jQuery & jQuery-UI
         'jquery': {
-      	    src: 'jquery-2.0.0.min.js',
+      	    src: 'lib/jquery-2.0.0.min.js',
       	    exports: 'jQuery'
         },
         'jqueryui': {
-	        src: 'jquery-ui.min.js'
+	        src: 'lib/jquery-ui.min.js'
         },
     
         // Backbone.js & Underscore.js & Jade.js
         'underscore': {
-	        src: 'underscore-min.js',
+	        src: 'lib/underscore-min.js',
             exports: '_'
         },
         'backbone': {
-		    src: 'backbone-min.js',
+		    src: 'lib/backbone-min.js',
 		    deps: ['underscore', 'jquery'],
 		    exports: 'Backbone'
 	    },
     	'jade': {
-    		src: 'jade.min.js',
+    		src: 'lib/jade.min.js',
 	    	exports: 'jade'
 	    },
 	
     	// Scripts for Flat-UI
     	'flat-dropkick': {
-    		src: 'jquery.dropkick-1.0.0.js'
+    		src: 'lib/jquery.dropkick-1.0.0.js'
     	},
 	    'flat-checkbox-radio': {
-	    	src: 'custom_checkbox_and_radio.js'
+	    	src: 'lib/custom_checkbox_and_radio.js'
 	    },
 	    'flat-radio': {
-	    	src: 'custom_radio.js'
+	    	src: 'lib/custom_radio.js'
 	    },
 	    'flat-tagsinput': {
-	    	src: 'jquery.tagsinput.js'
+	    	src: 'lib/jquery.tagsinput.js'
 	    },
 	    'flat-bootstrap-tooltip': {
-	    	src: 'bootstrap-tooltip.js'
+	    	src: 'lib/bootstrap-tooltip.js'
 	    },
 	    'flat-placeholder': {
-	    	src: 'jquery.placeholder.js'
+	    	src: 'lib/jquery.placeholder.js'
 	    },
 	    'flat-application': {
-	    	src: 'application.js'
+	    	src: 'lib/application.js'
 	    }
 
 	
