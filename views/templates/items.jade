@@ -1,0 +1,15 @@
+//
+   Created with JetBrains WebStorm.
+   User: DYZ
+   Date: 13-5-14
+   Time: 下午3:49
+   To change this template use File | Settings | File Templates.
+
+.row.demo-tiles
+    for itm in items
+        itm = itm.attributes
+        .span3(id=itm.iname)
+            .tile
+                img(class='tile-image big illustration', src=itm.img)
+                h3(class='tile-title')= itm.name
+                p(class='tile-desc')= itm.intro

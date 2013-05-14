@@ -1,15 +1,13 @@
 var router;
+var loading = "";
+var baseUrl = "http://127.0.0.1:3000";
 define(function(require) {
-    var baseUrl = "http://127.0.0.1:3000";
-    var loading = "";
-
     var $ = require('jquery');
     var Backbone = require('backbone');
-    var view = require('view');
-    var routers = require('router');
-    var model = require('model');
+    var routers = require('class/router');
+    require('categoriesview');
     require('md5')($);
-    console.log($.md5("abc"));
+    //console.log($.md5("abc"));
     $(document).ready(function() {
         //var view = require('view');
         //router.begin();
@@ -17,15 +15,14 @@ define(function(require) {
         $.get(baseUrl + "/loading.html", function(response, status) {
             if(status == "success") {
                 loading = response;
-                console.log(loading);
+                //console.log(loading);
             }
         });
-        var categoriesView = new view.CategoryView();
-        categoriesView.render();
+        //var categoriesView = require('categoriesview').categoriesView;
         router = new routers.Router();
         Backbone.history.start();
 
-        console.log(categoriesView);
+        //console.log(categoriesView);
     });
 //    function onLoad() {
 //        // Fetch loading page from server

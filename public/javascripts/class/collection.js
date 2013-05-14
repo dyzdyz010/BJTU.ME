@@ -7,7 +7,7 @@
  */
 define(function(require, exports) {
     var Backbone = require('backbone');
-    var model = require('model');
+    var model = require('class/model');
     var baseUrl = "http://127.0.0.1:3000";
 
     exports.Categories = Backbone.Collection.extend({
@@ -17,7 +17,7 @@ define(function(require, exports) {
 
     exports.Items = Backbone.Collection.extend({
         model: model.Item,
-        url: baseUrl + "/"
+        url: baseUrl + "/items"
     });
 
 });

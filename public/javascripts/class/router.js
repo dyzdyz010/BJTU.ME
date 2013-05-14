@@ -1,15 +1,16 @@
 define(function(require, exports) {
     var $ = require('jquery');
     var Backbone = require('backbone');
-    var baseUrl = "http://127.0.0.1:3000";
+    var View = require('class/view');
 
     exports.Router = Backbone.Router.extend({
         routes: {
             "login": "login",
             "login/submit": "loginSubmit",
             "register": "register",
-            "about": "showAbout",
-            "items/:cname": "showItems"
+            "items/:cname": "showItems",
+            "item/:iname": "showItem",
+            "about": "showAbout"
         },
         login: function() {
             $("#content").fadeOut(function() {
@@ -37,17 +38,29 @@ define(function(require, exports) {
                 });
             });
         },
-        showAbout: function() {
-            alert("This is the router function showAbout.");
-        },
         showItems: function(cname) {
             var model = categories.where({cname: cname}).pop();
-            console.log(model);
+            var attr = model.attributes;
             $('#title').fadeOut(200, function() {
-                $('#title').html(model.name + '<small>' + model.intro + '</small>');
+                $('#title').html(attr.name + '<small>' + attr.intro + '</small>');
+                $('#title').fadeIn(200);
             });
-            $('#title').fadeIn(200);
-            console.log(model);
+//            $('#content').fadeOut(200, function() {
+//                $('#content').html(loading);
+//                $('#content').fadeIn(200);
+//            });
+            var itemsView = new View.ItemsView({cname:cname});
+        },
+        showItem: function(iname) {
+            var model = items.where({iname: iname}).pop();
+            var attr = model.attributes;
+            $('#title').fadeOut(200, function() {
+                $('#title').html(attr.name + '<small>' + attr.intro + '</small>');
+                $('#title').fadeIn(200);
+            });
+        },
+        showAbout: function() {
+            console.log("This is the router function showAbout.");
         }
     });
 });

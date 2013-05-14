@@ -1,7 +1,7 @@
 .row.demo-tiles
     for clss in classes
         clss = clss.attributes
-        .span3(onclick='router.navigate("items/#{clss.cname}", {trigger:true})')
+        .span3(id=clss.cname)
             .tile
                 img(class='tile-image big illustration', src=clss.img)
                 h3(class='tile-title')= clss.name
