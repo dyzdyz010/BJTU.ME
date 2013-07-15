@@ -5,6 +5,7 @@
  * Time: 下午3:30
  * To change this template use File | Settings | File Templates.
  */
+
 define(function(require, exports) {
     var $ = require('jquery');
     var Backbone = require('backbone');
@@ -69,6 +70,4 @@ define(function(require, exports) {
             router.navigate("item/"+iname, {trigger:true});
         }
     });
-
-    //console.log(exports);
 });

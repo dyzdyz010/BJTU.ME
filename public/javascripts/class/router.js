@@ -8,6 +8,7 @@ define(function(require, exports) {
             "login": "login",
             "login/submit": "loginSubmit",
             "register": "register",
+            "register/submit": "registerSubmit",
             "items/:cname": "showItems",
             "item/:iname": "showItem",
             "about": "showAbout"
@@ -36,6 +37,13 @@ define(function(require, exports) {
                     $("#content").html(response);
                     $("#content").fadeIn();
                 });
+            });
+        },
+        registerSubmit: function() {
+            $.post(baseUrl+"/register", {mail:$("#login-mail").val(), passwd:$("#login-pass").val()}, function(response, status) {
+                if(response.code == 0) {
+                    console.log("Login success.");
+                }
             });
         },
         showItems: function(cname) {
